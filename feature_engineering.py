@@ -7,7 +7,7 @@ import random
 import time
 
 
-class Individual():
+class Individual:
     def __init__(self, genes):
         self.fitness = None
         self.genes = set(genes)
@@ -161,6 +161,9 @@ class Engine:
 
 
     def genetic(self, X, y):
+        """
+        Use a genetic algorithm to fit y with the 'most predictive' subset of X.
+        """
         X = self.dummify_columns(X)
         X = self.squares(X)
         X = self.logs(X)
@@ -186,8 +189,8 @@ class Engine:
                 mutations = int(np.log(1.0 / random.random()) / np.log(2))
                 try:
                     if random.random() < 0.5:
-                        additonal_genes = set(random.sample(genes, mutations))
-                        population[i].genes = population[i].genes.union(additonal_genes)
+                        additional_genes = set(random.sample(genes, mutations))
+                        population[i].genes = population[i].genes.union(additional_genes)
                     else:
                         population[i].genes = population[i].genes - set(random.sample(population[i].genes, mutations))
                 except ValueError:
